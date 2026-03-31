@@ -111,3 +111,7 @@ npm run build
 ```
 
 Produces a static export with dynamic API route for quote submissions.
+
+## Status
+
+**v1 — First iteration complete.** All 7 sections and the quote page are built and rendering. Animations and polish are functional but still being refined. Not yet pushed to GitHub (pending remote fix).

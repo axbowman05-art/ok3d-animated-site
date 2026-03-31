@@ -26,6 +26,7 @@ export interface GalleryItem {
   title: string;
   material: string;
   industry: string;
+  modelUrl?: string;
 }
 
 export interface Testimonial {

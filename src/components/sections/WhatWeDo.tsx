@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap-utils";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import { capabilities } from "@/lib/content";

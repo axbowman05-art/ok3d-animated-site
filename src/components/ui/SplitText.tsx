@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { gsap } from "@/lib/gsap-utils";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface SplitTextProps {
   children: string;
@@ -10,7 +13,7 @@ interface SplitTextProps {
   as?: "h1" | "h2" | "h3" | "p" | "span";
   delay?: number;
   stagger?: number;
-  trigger?: boolean;
+  scrollTrigger?: boolean;
 }
 
 export default function SplitText({
@@ -19,38 +22,41 @@ export default function SplitText({
   as: Tag = "h1",
   delay = 0,
   stagger = 0.02,
-  trigger = true,
+  scrollTrigger = true,
 }: SplitTextProps) {
   const containerRef = useRef<HTMLElement>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion || !trigger || !containerRef.current) return;
+    if (reducedMotion || !containerRef.current) return;
 
     const chars = containerRef.current.querySelectorAll(".split-char");
+    if (!chars.length) return;
 
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        chars,
-        { y: 40, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          stagger,
-          delay,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }, containerRef);
+    const tween = gsap.fromTo(
+      chars,
+      { y: 40, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.6,
+        stagger,
+        delay,
+        ease: "power3.out",
+        scrollTrigger: scrollTrigger
+          ? {
+              trigger: containerRef.current,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            }
+          : undefined,
+      }
+    );
 
-    return () => ctx.revert();
-  }, [delay, stagger, trigger, reducedMotion]);
+    return () => {
+      tween.kill();
+    };
+  }, [delay, stagger, scrollTrigger, reducedMotion]);
 
   const words = children.split(" ");
 

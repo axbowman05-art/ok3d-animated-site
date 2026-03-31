@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Materials", href: "#materials" },
   { label: "Process", href: "#process" },
   { label: "Gallery", href: "#gallery" },
+  { label: "Shop", href: "/products" },
   { label: "Testimonials", href: "#testimonials" },
 ];
 
@@ -45,6 +46,10 @@ export default function Navbar() {
 
   const handleNavClick = (href: string) => {
     setMobileOpen(false);
+    if (!href.startsWith("#")) {
+      window.location.href = href;
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
   };
@@ -60,7 +65,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white font-bold text-sm group-hover:scale-110 transition-transform">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-accent to-cta flex items-center justify-center text-background font-bold text-sm group-hover:scale-110 transition-transform">
               3D
             </div>
             <span className="font-semibold text-lg tracking-tight">
@@ -88,7 +93,7 @@ export default function Navbar() {
             ))}
             <Link
               href="/quote"
-              className="bg-accent hover:bg-accent-dark text-white text-sm font-medium px-5 py-2 rounded-lg transition-colors active:scale-[0.97]"
+              className="bg-cta hover:bg-cta-dark text-background text-sm font-semibold px-5 py-2 rounded-lg transition-all active:scale-[0.97] shadow-md shadow-cta/20 hover:shadow-cta/40"
             >
               Get a Quote
             </Link>
@@ -132,7 +137,7 @@ export default function Navbar() {
               <Link
                 href="/quote"
                 onClick={() => setMobileOpen(false)}
-                className="bg-accent hover:bg-accent-dark text-white font-medium px-8 py-3 rounded-lg transition-colors mt-4"
+                className="bg-cta hover:bg-cta-dark text-background font-semibold px-8 py-3 rounded-lg transition-all shadow-md shadow-cta/20 mt-4"
               >
                 Get a Quote
               </Link>

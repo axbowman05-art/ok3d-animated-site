@@ -2,18 +2,19 @@ import { Capability, Material, ProcessStep, GalleryItem, Testimonial } from "./t
 
 export const siteConfig = {
   name: "OK3D Prints",
-  tagline: "Precision Parts. On Demand.",
+  tagline: "Have an Idea? We'll Build It.",
   description:
-    "Functional 3D printing for businesses that need reliable parts, fast turnaround, and engineering-grade quality.",
-  email: "hello@ok3dprints.com",
-  phone: "(555) 123-4567",
+    "Custom 3D printing for businesses and individuals. Describe what you need — we handle the design, engineering, and production.",
+  email: "ok3dinc@gmail.com",
+  phone: "(562) 273-6603",
 };
 
 export const heroContent = {
-  preHeadline: "PRECISION PARTS. ON DEMAND.",
-  headline: "We turn your designs into functional parts",
+  preHeadline: "CUSTOM PARTS. NO FILE NEEDED.",
+  headline: "You bring the idea.",
+  headlineAccent: "We handle the rest.",
   subheadline:
-    "Engineering-grade 3D printing for businesses. From prototype to production — reliable, fast, and built to spec.",
+    "Engineering-grade 3D printing on demand. Describe what you need in plain English — we'll design, quote, and build it.",
   ctaPrimary: "Get a Quote",
   ctaSecondary: "See Our Work",
   industries: [
@@ -97,16 +98,16 @@ export const materials: Material[] = [
 export const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Upload",
+    title: "Describe",
     description:
-      "Send us your CAD files — STL, STEP, 3MF, or OBJ. We accept all major formats. No account needed.",
+      "Tell us what you need in plain English — dimensions, function, material preferences, or just a rough idea. No CAD file required. If you have one, great. If not, we'll figure it out together.",
     icon: "upload",
   },
   {
     number: "02",
-    title: "Review",
+    title: "Review & Quote",
     description:
-      "Our engineers review your design for printability, suggest optimizations, and send a detailed quote within 24 hours.",
+      "Our engineers review your request, work through the design details with you, and send a detailed quote within 24 hours. We'll flag any questions before we start.",
     icon: "review",
   },
   {
@@ -125,13 +126,50 @@ export const processSteps: ProcessStep[] = [
   },
 ];
 
+export const processMobileFallback = "From idea to finished part";
+
+export const galleryContent = {
+  sectionLabel: "RECENT BUILDS",
+  sectionHeading: "OUR WORK",
+};
+
 export const galleryItems: GalleryItem[] = [
-  { title: "Custom Enclosure", material: "PETG", industry: "Electronics" },
-  { title: "Gear Assembly", material: "Nylon", industry: "Robotics" },
-  { title: "Bracket Mount", material: "ABS", industry: "Automotive" },
-  { title: "Fluid Connector", material: "PETG", industry: "Medical" },
-  { title: "Precision Housing", material: "Resin", industry: "Aerospace" },
-  { title: "Cable Guide", material: "PLA", industry: "Industrial" },
+  {
+    title: "Press Beater Redesign",
+    material: "PLA",
+    industry: "Manufacturing",
+    modelUrl: "/models/Press Beater (redesigned).stl",
+  },
+  {
+    title: "Press Beater Base",
+    material: "PLA",
+    industry: "Manufacturing",
+    modelUrl: "/models/Press Beater- Bottom.stl",
+  },
+  {
+    title: "Large Spiral (CW)",
+    material: "Nylon",
+    industry: "Industrial",
+    modelUrl: "/models/Spiral- large (clockwise).stl",
+  },
+  {
+    title: "Large Spiral (CCW)",
+    material: "Nylon",
+    industry: "Industrial",
+    modelUrl: "/models/Spiral- large (counterclockwise).stl",
+  },
+  {
+    title: "Small Spiral (CW)",
+    material: "PETG",
+    industry: "Industrial",
+    modelUrl: "/models/Spiral- small (clockwise).stl",
+  },
+  {
+    title: "Small Spiral (CCW)",
+    material: "PETG",
+    industry: "Industrial",
+    modelUrl: "/models/Spiral- small (counterclockwise).stl",
+  },
 ];
 
 export const testimonials: Testimonial[] = [
@@ -161,9 +199,18 @@ export const testimonials: Testimonial[] = [
 export const ctaContent = {
   headline: "Ready to Build?",
   subheadline:
-    "Tell us about your project and get a detailed quote within 24 hours. No minimum orders, no setup fees.",
+    "Describe your part and get a detailed quote within 24 hours. No minimum orders, no setup fees — and no file needed to get started.",
   ctaText: "Request a Quote",
+  ctaSecondaryText: "or schedule a consultation",
   fallback: "Or email us directly at",
+};
+
+export const quoteFormContent = {
+  step2DescriptionLabel: "Tell us what you need",
+  step2DescriptionPlaceholder:
+    "e.g. 'I need a mounting bracket about 3 inches wide, needs to hold 2 lbs, outdoor use' — plain English is fine, no file needed",
+  successMessage:
+    "We'll review your project and reach out within 24 hours with questions or a quote.",
 };
 
 export const materialOptions = [
@@ -188,4 +235,30 @@ export const deadlineOptions = [
   "Within 2 weeks",
   "Within 1 week",
   "ASAP (rush)",
+];
+
+export interface Product {
+  id: string;
+  name: string;
+  material: string;
+  price: number;
+  description: string;
+  image: string;
+  category: string;
+  available: boolean;
+}
+
+export const products: Product[] = [
+  // Products are added here as custom orders are completed and listed for retail
+  // Example shape:
+  // {
+  //   id: "press-beater-redesign",
+  //   name: "Press Beater Redesign",
+  //   material: "PLA",
+  //   price: 0,
+  //   description: "...",
+  //   image: "/products/press-beater.jpg",
+  //   category: "Industrial",
+  //   available: false
+  // }
 ];

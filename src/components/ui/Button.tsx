@@ -52,7 +52,7 @@ export default function Button({
 
   const variantClasses =
     variant === "primary"
-      ? "bg-accent hover:bg-accent-dark text-white shadow-lg shadow-accent/20 hover:shadow-accent/40"
+      ? "bg-cta hover:bg-cta-dark text-background font-semibold shadow-lg shadow-cta/25 hover:shadow-cta/50"
       : "border border-border hover:border-accent/50 text-gray-300 hover:text-white";
 
   const sizeClasses =

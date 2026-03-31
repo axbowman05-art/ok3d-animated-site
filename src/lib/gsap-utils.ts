@@ -3,9 +3,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
+// Always register — this module is only imported client-side
+gsap.registerPlugin(ScrollTrigger);
 
 export const fadeInUp = (
   element: gsap.TweenTarget,

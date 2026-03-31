@@ -3,26 +3,12 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/ui/Button";
 import { materialOptions, quantityOptions, deadlineOptions } from "@/lib/content";
-
-const quoteSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Valid email required"),
-  company: z.string().optional(),
-  phone: z.string().optional(),
-  material: z.string().min(1, "Please select a material"),
-  quantity: z.string().min(1, "Please select quantity"),
-  description: z.string().min(10, "Please describe your project"),
-  deadline: z.string().min(1, "Please select a deadline"),
-  notes: z.string().optional(),
-});
-
-type QuoteFormValues = z.infer<typeof quoteSchema>;
+import { quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
 
 const steps = ["Contact", "Project", "Details", "Confirm"];
 
@@ -30,6 +16,8 @@ export default function QuotePage() {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [trackingCode, setTrackingCode] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string>("");
 
   const {
     register,
@@ -65,11 +53,17 @@ export default function QuotePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
+      const json = await res.json();
       if (res.ok) {
-        setSubmitted(true);
+        setTrackingCode(json.trackingCode ?? null);
+        setSuccessMessage(json.message ?? "Quote request received.");
+      } else {
+        setSuccessMessage(json.message ?? "Something went wrong. Please try again or email us directly at ok3dinc@gmail.com.");
       }
+      setSubmitted(true);
     } catch {
-      console.error("Submission failed");
+      setSuccessMessage("Something went wrong. Please try again or email us directly at ok3dinc@gmail.com.");
+      setSubmitted(true);
     } finally {
       setSubmitting(false);
     }
@@ -98,13 +92,35 @@ export default function QuotePage() {
           </div>
 
           <h2 className="text-2xl font-bold mb-3">Quote Request Sent</h2>
-          <p className="text-gray-400 mb-8">
-            We&apos;ll review your project and send a detailed quote within 24
-            hours. Check your email for confirmation.
+          <p className="text-gray-400 mb-6">
+            {successMessage ||
+              "We\u2019ll review your project and send a detailed quote within 24 hours."}
           </p>
+          {trackingCode && (
+            <div className="mb-8 bg-accent/10 border border-accent/30 rounded-xl px-6 py-4">
+              <p className="text-xs text-gray-500 mb-1 uppercase tracking-widest">
+                Tracking Code
+              </p>
+              <p className="font-mono text-accent text-base break-all">
+                {trackingCode}
+              </p>
+              <p className="text-xs text-gray-500 mt-2">
+                Save this code to check the status of your order.
+              </p>
+            </div>
+          )}
           <Button href="/" variant="secondary">
             Back to Home
           </Button>
+          {/* TODO: replace with real Calendly link */}
+          <a
+            href="https://calendly.com/ok3dinc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block mt-4 text-sm text-accent hover:text-accent/80 transition-colors"
+          >
+            Want to talk through your project? Schedule a call →
+          </a>
         </motion.div>
       </div>
     );
@@ -269,7 +285,7 @@ export default function QuotePage() {
                   <p>
                     You can also email CAD files (STL, STEP, 3MF, OBJ) directly
                     to{" "}
-                    <span className="text-accent">hello@ok3dprints.com</span>{" "}
+                    <span className="text-accent">ok3dinc@gmail.com</span>{" "}
                     after submitting.
                   </p>
                 </div>

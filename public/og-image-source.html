@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1200">
+<title>OK3D Prints OG Image</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    background: #0A0A0A;
+    position: relative;
+  }
+
+  /* Blueprint grid */
+  .grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 116, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 116, 255, 0.06) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* Larger grid lines every 5 cells */
+  .grid-major {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 116, 255, 0.12) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 116, 255, 0.12) 1px, transparent 1px);
+    background-size: 200px 200px;
+  }
+
+  /* Blue glow behind text */
+  .glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(0, 116, 255, 0.15) 0%, transparent 70%);
+    filter: blur(40px);
+  }
+
+  .gear {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%) rotate(-14deg);
+    color: rgba(0, 116, 255, 0.08);
+    z-index: 1;
+  }
+
+  /* Corner geometric accents */
+  .corner {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+  }
+
+  .corner-tl {
+    top: 30px;
+    left: 30px;
+    border-top: 2px solid rgba(0, 116, 255, 0.3);
+    border-left: 2px solid rgba(0, 116, 255, 0.3);
+  }
+
+  .corner-tr {
+    top: 30px;
+    right: 30px;
+    border-top: 2px solid rgba(0, 116, 255, 0.3);
+    border-right: 2px solid rgba(0, 116, 255, 0.3);
+  }
+
+  .corner-bl {
+    bottom: 30px;
+    left: 30px;
+    border-bottom: 2px solid rgba(0, 116, 255, 0.3);
+    border-left: 2px solid rgba(0, 116, 255, 0.3);
+  }
+
+  .corner-br {
+    bottom: 30px;
+    right: 30px;
+    border-bottom: 2px solid rgba(0, 116, 255, 0.3);
+    border-right: 2px solid rgba(0, 116, 255, 0.3);
+  }
+
+  /* Grid dots in corners */
+  .dots {
+    position: absolute;
+    display: grid;
+    grid-template-columns: repeat(3, 8px);
+    grid-template-rows: repeat(3, 8px);
+    gap: 6px;
+  }
+
+  .dots span {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: rgba(0, 116, 255, 0.35);
+  }
+
+  .dots-tl { top: 48px; left: 48px; }
+  .dots-tr { top: 48px; right: 48px; }
+  .dots-bl { bottom: 48px; left: 48px; }
+  .dots-br { bottom: 48px; right: 48px; }
+
+  /* Center content */
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+
+  .brand {
+    font-size: 82px;
+    font-weight: 900;
+    color: #FFFFFF;
+    letter-spacing: -2px;
+    text-shadow: 0 0 60px rgba(0, 116, 255, 0.3);
+  }
+
+  .tagline {
+    font-size: 26px;
+    font-weight: 400;
+    color: #94A3B8;
+    margin-top: 16px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  /* Thin accent line */
+  .divider {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0074FF, transparent);
+    margin-top: 24px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="grid-major"></div>
+  <div class="glow"></div>
+  <svg class="gear" viewBox="0 0 100 100" aria-hidden="true">
+    <path fill="currentColor" d="M57.7 4.5l2.2 8.9c3.1.7 6 1.9 8.8 3.6l7.9-4.7 8.6 8.6-4.7 7.9c1.7 2.7 2.9 5.7 3.6 8.8l8.9 2.2v12.2l-8.9 2.2c-.7 3.1-1.9 6-3.6 8.8l4.7 7.9-8.6 8.6-7.9-4.7c-2.7 1.7-5.7 2.9-8.8 3.6l-2.2 8.9H45.5l-2.2-8.9c-3.1-.7-6-1.9-8.8-3.6l-7.9 4.7-8.6-8.6 4.7-7.9c-1.7-2.7-2.9-5.7-3.6-8.8L10.2 52V39.8l8.9-2.2c.7-3.1 1.9-6 3.6-8.8l-4.7-7.9 8.6-8.6 7.9 4.7c2.7-1.7 5.7-2.9 8.8-3.6l2.2-8.9h12.2zm-6.1 23.5c-12.1 0-22 9.8-22 22s9.8 22 22 22 22-9.8 22-22-9.8-22-22-22zm0 9.5c6.9 0 12.5 5.6 12.5 12.5S58.5 62.5 51.6 62.5 39.1 56.9 39.1 50 44.7 37.5 51.6 37.5z"/>
+  </svg>
+
+  <!-- Corner brackets -->
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <!-- Corner dots -->
+  <div class="dots dots-tl">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <div class="dots dots-tr">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <div class="dots dots-bl">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+  <div class="dots dots-br">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Main content -->
+  <div class="content">
+    <div class="brand">OK3D Prints</div>
+    <div class="tagline">Precision Parts  On Demand</div>
+    <div class="divider"></div>
+  </div>
+</body>
+</html>
