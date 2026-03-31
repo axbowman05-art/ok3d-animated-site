@@ -20,9 +20,17 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://ok3dprints.com"
+  ),
   title: "OK3D Prints — Precision 3D Printing for Business",
   description:
     "Engineering-grade 3D printing for businesses. Functional parts, fast turnaround, and quality you can count on.",
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
   openGraph: {
     title: "OK3D Prints — Precision 3D Printing for Business",
     description:

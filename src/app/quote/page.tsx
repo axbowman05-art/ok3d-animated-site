@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/ui/Button";
-import { materialOptions, quantityOptions, deadlineOptions } from "@/lib/content";
+import { materialOptions, quantityOptions, deadlineOptions, quoteFormContent } from "@/lib/content";
 import { quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
 
 const steps = ["Contact", "Project", "Details", "Confirm"];
@@ -246,7 +246,8 @@ export default function QuotePage() {
                   {...register("quantity")}
                 />
                 <TextareaField
-                  label="Project Description"
+                  label={quoteFormContent.step2DescriptionLabel}
+                  placeholder={quoteFormContent.step2DescriptionPlaceholder}
                   error={errors.description?.message}
                   {...register("description")}
                 />

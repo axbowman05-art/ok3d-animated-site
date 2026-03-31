@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { galleryItems } from "@/lib/content";
+import { galleryItems, galleryContent } from "@/lib/content";
 
 const STLViewer = dynamic(() => import("@/components/ui/STLViewer"), {
   ssr: false,
@@ -73,7 +73,7 @@ export default function Gallery() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="gal-heading text-center mb-16" style={reducedMotion ? undefined : { opacity: 0 }}>
           <p className="font-mono text-accent text-sm tracking-wider mb-3">
-            OUR WORK
+            {galleryContent.sectionLabel}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
             Featured <span className="text-accent">prints</span>

@@ -121,6 +121,10 @@ export default function CTA() {
           </a>
         </div>
 
+        <p className="text-sm text-gray-500 italic mt-4">
+          {ctaContent.ctaSecondaryText}
+        </p>
+
         <p
           className="cta-fallback text-sm text-gray-500 mt-8"
           style={reducedMotion ? undefined : { opacity: 0 }}

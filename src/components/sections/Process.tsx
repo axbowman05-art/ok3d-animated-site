@@ -7,7 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { processSteps } from "@/lib/content";
+import { processSteps, processMobileFallback } from "@/lib/content";
 import {
   ArrowUpTrayIcon,
   MagnifyingGlassIcon,
@@ -105,7 +105,7 @@ export default function Process() {
             HOW IT WORKS
           </p>
           <h2 className="text-3xl font-bold tracking-tight">
-            From file to <span className="text-accent">finished part</span>
+            {processMobileFallback}
           </h2>
         </div>
 
