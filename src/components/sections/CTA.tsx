@@ -112,7 +112,7 @@ export default function CTA() {
           </Button>
           {/* TODO: replace with real Calendly link */}
           <a
-            href="https://calendly.com/ok3dinc"
+            href="https://calendly.com/ok3dinc/3d-print-consultation"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-6 py-3 text-sm font-semibold rounded-lg border border-accent text-accent hover:bg-accent/10 transition-all duration-200 active:scale-[0.97]"

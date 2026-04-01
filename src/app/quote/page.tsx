@@ -114,7 +114,7 @@ export default function QuotePage() {
           </Button>
           {/* TODO: replace with real Calendly link */}
           <a
-            href="https://calendly.com/ok3dinc"
+            href="https://calendly.com/ok3dinc/3d-print-consultation"
             target="_blank"
             rel="noopener noreferrer"
             className="block mt-4 text-sm text-accent hover:text-accent/80 transition-colors"
