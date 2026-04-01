@@ -108,7 +108,37 @@ Top targets to prioritize:
 
 ---
 
+---
+
+## Pre-Deploy Checklist (next session — deploying 2026-04-02)
+
+### Step 1: Finalize Content
+- [ ] Review all copy in `src/lib/content.ts`
+- [ ] Replace placeholder testimonials with real ones (3 ideal)
+- [ ] Add Instagram/LinkedIn links to `src/components/layout/Footer.tsx`
+
+### Step 2: Audit (run through before deploying)
+- [ ] Customer POV — hero clear in 3 seconds, mobile quote flow, Calendly CTAs
+- [ ] Owner POV — submit test quote, check Hub + both emails, GA4 firing
+- [ ] Security — `.env.local` not in GitHub, form XSS/length validation, no keys in browser
+- [ ] Structural — `npm run build` clean, zero console errors, Lighthouse 90+, sitemap/robots valid
+
+### Step 3: Deploy (in order)
+1. Buy ok3dprints.com at Cloudflare Registrar (~$12/yr)
+2. Add domain to Cloudflare free plan → update nameservers
+3. SSH into VM (`ubuntu@129.213.121.99`) → set up Cloudflare tunnel for `api.ok3dprints.com`
+4. Start Hub + cloudflared as systemd services on VM
+5. Deploy Prints to Vercel → connect `axbowman05-art/ok3d-animated-site` → add env vars:
+   - `HUB_API_URL` = `https://api.ok3dprints.com`
+   - `RESEND_API_KEY` = `re_jNCjo1qB_9WP1fo3m8ZP77EBsBscjQX44`
+   - `NOTIFY_EMAIL` = `ok3dinc@gmail.com`
+   - `HUB_API_SECRET` = `a2d419705f6fa051f4bfd93a55d12e85964aa73f8faf7c2d076351f385a5630d`
+   - `NEXT_PUBLIC_SITE_URL` = `https://ok3dprints.com`
+6. Connect domain in Vercel dashboard
+7. Add Resend DNS records for sender domain verification
+8. End-to-end test: submit quote → Hub → both emails arrive
+
 ## GitHub
 Repo: `github.com/axbowman05-art/ok3d-animated-site` (private)
 Branch: `main`
-Status: all today's work is committed and pushed
+Status: all work committed and pushed as of 2026-04-01
