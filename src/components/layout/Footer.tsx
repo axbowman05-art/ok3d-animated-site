@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { siteConfig } from "@/lib/content";
 
 export default function Footer() {
@@ -22,12 +23,25 @@ export default function Footer() {
               {siteConfig.email}
             </a>
             <span className="hidden md:inline">|</span>
-            <span>{siteConfig.phone}</span>
+            <a
+              href={`tel:${siteConfig.phone}`}
+              className="hover:text-white transition-colors"
+            >
+              {siteConfig.phone}
+            </a>
           </div>
 
-          <div className="text-sm text-gray-600">
-            &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
-            reserved.
+          <div className="flex items-center gap-4 text-sm text-gray-600">
+            <Link
+              href="/privacy"
+              className="hover:text-gray-400 transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <span>·</span>
+            <span>
+              &copy; {new Date().getFullYear()} {siteConfig.name}
+            </span>
           </div>
         </div>
       </div>

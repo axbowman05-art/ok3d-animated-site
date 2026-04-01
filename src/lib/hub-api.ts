@@ -1,4 +1,9 @@
 const HUB_API_URL = process.env.HUB_API_URL ?? "http://localhost:3001";
+const HUB_API_SECRET = process.env.HUB_API_SECRET ?? "";
+
+function hubHeaders(extra?: Record<string, string>): Record<string, string> {
+  return { "Content-Type": "application/json", "x-api-key": HUB_API_SECRET, ...extra };
+}
 
 // ---- Types ----
 
@@ -66,7 +71,7 @@ export async function findOrCreateCustomer(
   if (data.email) {
     const listRes = await fetch(`${HUB_API_URL}/api/customers/`, {
       method: "GET",
-      headers: { "Content-Type": "application/json" },
+      headers: hubHeaders(),
     });
 
     if (listRes.ok) {
@@ -81,7 +86,7 @@ export async function findOrCreateCustomer(
   // Create new customer
   const createRes = await fetch(`${HUB_API_URL}/api/customers/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: hubHeaders(),
     body: JSON.stringify(data),
   });
 
@@ -137,7 +142,7 @@ export async function createQuoteOrder(
 
   const res = await fetch(`${HUB_API_URL}/api/orders/`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: hubHeaders(),
     body: JSON.stringify(payload),
   });
 
