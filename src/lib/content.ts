@@ -10,9 +10,9 @@ export const siteConfig = {
 };
 
 export const heroContent = {
-  preHeadline: "CUSTOM PARTS. NO FILE NEEDED.",
-  headline: "You bring the idea.",
-  headlineAccent: "We handle the rest.",
+  preHeadline: "CUSTOM PARTS — NO FILE NEEDED",
+  headline: "You bring the idea",
+  headlineAccent: "We handle the rest",
   subheadline:
     "Engineering-grade 3D printing on demand. Describe what you need in plain English — we'll design, quote, and build it.",
   ctaPrimary: "Get a Quote",
@@ -87,6 +87,13 @@ export const materials: Material[] = [
     useCases: "Gears, bearings, structural components",
   },
   {
+    name: "TPU",
+    color: "#f97316",
+    colorClass: "from-orange-500/20",
+    properties: ["Flexible", "Impact resistant", "Rubber-like"],
+    useCases: "Gaskets, grips, wearables, shock-absorbing parts",
+  },
+  {
     name: "Resin",
     color: "#f43f5e",
     colorClass: "from-rose-500/20",
@@ -101,7 +108,7 @@ export const processSteps: ProcessStep[] = [
     title: "Describe",
     description:
       "Tell us what you need in plain English — dimensions, function, material preferences, or just a rough idea. No CAD file required. If you have one, great. If not, we'll figure it out together.",
-    icon: "upload",
+    icon: "chat",
   },
   {
     number: "02",
@@ -135,37 +142,43 @@ export const galleryContent = {
 
 export const galleryItems: GalleryItem[] = [
   {
-    title: "Press Beater Redesign",
+    title: "B. Bunch Press Beater",
     material: "PLA",
     industry: "Manufacturing",
-    modelUrl: "/models/Press Beater (redesigned).stl",
+    modelUrl: "/models/Press_Beater_Final.stl",
   },
   {
-    title: "Press Beater Base",
+    title: "B. Bunch Press Beater Bottom",
     material: "PLA",
     industry: "Manufacturing",
     modelUrl: "/models/Press Beater- Bottom.stl",
   },
   {
-    title: "Large Spiral (CW)",
+    title: "B. Bunch Key Way",
+    material: "PLA",
+    industry: "Manufacturing",
+    modelUrl: "/models/B.Bunch 500 Key way.stl",
+  },
+  {
+    title: "B. Bunch 700 Large Spiral (CW)",
     material: "Nylon",
     industry: "Industrial",
     modelUrl: "/models/Spiral- large (clockwise).stl",
   },
   {
-    title: "Large Spiral (CCW)",
+    title: "B. Bunch 700 Large Spiral (CCW)",
     material: "Nylon",
     industry: "Industrial",
     modelUrl: "/models/Spiral- large (counterclockwise).stl",
   },
   {
-    title: "Small Spiral (CW)",
+    title: "B. Bunch 700 Small Spiral (CW)",
     material: "PETG",
     industry: "Industrial",
     modelUrl: "/models/Spiral- small (clockwise).stl",
   },
   {
-    title: "Small Spiral (CCW)",
+    title: "B. Bunch 700 Small Spiral (CCW)",
     material: "PETG",
     industry: "Industrial",
     modelUrl: "/models/Spiral- small (counterclockwise).stl",
@@ -173,27 +186,7 @@ export const galleryItems: GalleryItem[] = [
 ];
 
 export const testimonials: Testimonial[] = [
-  {
-    quote:
-      "OK3D delivered 200 custom brackets in under a week. Quality was spot-on, and they caught a wall thickness issue we missed. Saved us from a costly reprint.",
-    author: "Marcus Chen",
-    company: "RoboFlow Systems",
-    role: "Lead Mechanical Engineer",
-  },
-  {
-    quote:
-      "We switched from injection molding for small runs. The cost savings are significant, and the PETG parts hold up in our outdoor installations without any issues.",
-    author: "Sarah Mitchell",
-    company: "GreenGrid Energy",
-    role: "Operations Director",
-  },
-  {
-    quote:
-      "The resin prints for our dental aligners are incredibly precise. The surface finish is smooth enough to use directly from the printer. Very impressed with the consistency.",
-    author: "Dr. James Park",
-    company: "Park Dental Studio",
-    role: "Founder",
-  },
+  // Add real testimonials here — { quote, author, role, company }
 ];
 
 export const ctaContent = {
@@ -244,21 +237,87 @@ export interface Product {
   price: number;
   description: string;
   image: string;
+  modelUrl?: string;
   category: string;
   available: boolean;
 }
 
 export const products: Product[] = [
-  // Products are added here as custom orders are completed and listed for retail
-  // Example shape:
-  // {
-  //   id: "press-beater-redesign",
-  //   name: "Press Beater Redesign",
-  //   material: "PLA",
-  //   price: 0,
-  //   description: "...",
-  //   image: "/products/press-beater.jpg",
-  //   category: "Industrial",
-  //   available: false
-  // }
+  {
+    id: "b-bunch-press-beater",
+    name: "B. Bunch Press Beater",
+    material: "PLA",
+    price: 0,
+    description: "Production-ready press beater component engineered for manufacturing environments. Durable PLA construction with tight tolerances.",
+    image: "",
+    modelUrl: "/models/Press_Beater_Final.stl",
+    category: "Manufacturing",
+    available: true,
+  },
+  {
+    id: "b-bunch-press-beater-bottom",
+    name: "B. Bunch Press Beater Bottom",
+    material: "PLA",
+    price: 0,
+    description: "Precision base component for the B. Bunch Press Beater assembly. Engineered for repeatable positioning and secure mounting.",
+    image: "",
+    modelUrl: "/models/Press Beater- Bottom.stl",
+    category: "Manufacturing",
+    available: true,
+  },
+  {
+    id: "b-bunch-key-way",
+    name: "B. Bunch Key Way",
+    material: "PLA",
+    price: 0,
+    description: "Precision key way component for the B. Bunch assembly. Tight-tolerance PLA print for accurate fitment.",
+    image: "",
+    modelUrl: "/models/B.Bunch 500 Key way.stl",
+    category: "Manufacturing",
+    available: true,
+  },
+  {
+    id: "b-bunch-700-large-spiral-cw",
+    name: "B. Bunch 700 Large Spiral (CW)",
+    material: "Nylon",
+    price: 0,
+    description: "Large clockwise spiral printed in industrial-grade Nylon. Built for high-stress environments where flexibility and strength are both required.",
+    image: "",
+    modelUrl: "/models/Spiral- large (clockwise).stl",
+    category: "Industrial",
+    available: true,
+  },
+  {
+    id: "b-bunch-700-large-spiral-ccw",
+    name: "B. Bunch 700 Large Spiral (CCW)",
+    material: "Nylon",
+    price: 0,
+    description: "Large counter-clockwise spiral in Nylon. Mirror counterpart to the CW variant — commonly ordered as a matched pair.",
+    image: "",
+    modelUrl: "/models/Spiral- large (counterclockwise).stl",
+    category: "Industrial",
+    available: true,
+  },
+  {
+    id: "b-bunch-700-small-spiral-cw",
+    name: "B. Bunch 700 Small Spiral (CW)",
+    material: "PETG",
+    price: 0,
+    description: "Compact clockwise spiral in PETG. Chemical-resistant and impact-tough — ideal for mechanical assemblies.",
+    image: "",
+    modelUrl: "/models/Spiral- small (clockwise).stl",
+    category: "Industrial",
+    available: true,
+  },
+  {
+    id: "b-bunch-700-small-spiral-ccw",
+    name: "B. Bunch 700 Small Spiral (CCW)",
+    material: "PETG",
+    price: 0,
+    description: "Compact counter-clockwise spiral in PETG. Pairs with the CW variant for balanced assemblies.",
+    image: "",
+    modelUrl: "/models/Spiral- small (counterclockwise).stl",
+    category: "Industrial",
+    available: true,
+  },
 ];

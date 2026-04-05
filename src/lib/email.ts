@@ -17,7 +17,7 @@ interface QuoteEmailData {
   company?: string;
   phone?: string;
   material: string;
-  quantity: string;
+  quantity: number;
   description: string;
   deadline: string;
   notes?: string;
@@ -60,7 +60,7 @@ export async function sendOwnerNotification(data: QuoteEmailData) {
         ${data.phone ? `<tr><td style="padding: 8px 0; color: #94A3B8;">Phone</td><td style="padding: 8px 0;">${esc(data.phone)}</td></tr>` : ""}
         <tr><td colspan="2" style="padding: 16px 0 8px 0; border-top: 1px solid #1E3A5F;"></td></tr>
         <tr><td style="padding: 8px 0; color: #94A3B8;">Material</td><td style="padding: 8px 0;">${esc(data.material)}</td></tr>
-        <tr><td style="padding: 8px 0; color: #94A3B8;">Quantity</td><td style="padding: 8px 0;">${esc(data.quantity)}</td></tr>
+        <tr><td style="padding: 8px 0; color: #94A3B8;">Quantity</td><td style="padding: 8px 0;">${data.quantity} part${data.quantity === 1 ? "" : "s"}</td></tr>
         <tr><td style="padding: 8px 0; color: #94A3B8;">Deadline</td><td style="padding: 8px 0;">${esc(data.deadline)}</td></tr>
         <tr><td style="padding: 8px 0; color: #94A3B8;">Description</td><td style="padding: 8px 0;">${esc(data.description)}</td></tr>
         ${data.notes ? `<tr><td style="padding: 8px 0; color: #94A3B8;">Notes</td><td style="padding: 8px 0;">${esc(data.notes)}</td></tr>` : ""}
@@ -86,13 +86,14 @@ export async function sendCustomerConfirmation(data: QuoteEmailData) {
       </p>
       <div style="margin: 24px 0; padding: 16px; background: #111827; border: 1px solid #1E3A5F; border-radius: 8px;">
         <p style="margin: 0 0 4px 0; font-size: 12px; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Your Request</p>
-        <p style="margin: 4px 0; color: #F8FAFC;"><strong>${esc(data.material)}</strong> — ${esc(data.quantity)}</p>
+        <p style="margin: 4px 0; color: #F8FAFC;"><strong>${esc(data.material)}</strong> — ${data.quantity} part${data.quantity === 1 ? "" : "s"}</p>
         <p style="margin: 4px 0; color: #94A3B8; font-size: 14px;">${esc(data.description)}</p>
       </div>
       ${data.trackingCode ? `
       <div style="margin: 24px 0; padding: 16px; background: rgba(0, 116, 255, 0.1); border: 1px solid rgba(0, 116, 255, 0.3); border-radius: 8px; text-align: center;">
         <p style="margin: 0 0 4px 0; font-size: 12px; color: #94A3B8; text-transform: uppercase; letter-spacing: 1px;">Tracking Code</p>
-        <p style="margin: 0; font-family: monospace; font-size: 16px; color: #0074FF; word-break: break-all;">${esc(data.trackingCode)}</p>
+        <p style="margin: 0 0 8px 0; font-family: monospace; font-size: 16px; color: #0074FF; word-break: break-all;">${esc(data.trackingCode)}</p>
+        <a href="${process.env.HUB_API_URL ?? "https://api.ok3dprints.com"}/orders/track/${esc(data.trackingCode)}" style="font-size: 13px; color: #0074FF; text-decoration: underline;">Check order status &rarr;</a>
       </div>
       ` : ""}
       <p style="font-size: 14px; color: #94A3B8; line-height: 1.6;">

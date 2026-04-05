@@ -50,6 +50,11 @@ export default function Navbar() {
       window.location.href = href;
       return;
     }
+    // If on a sub-page, navigate home with the hash
+    if (window.location.pathname !== "/") {
+      window.location.href = "/" + href;
+      return;
+    }
     const el = document.querySelector(href);
     el?.scrollIntoView({ behavior: "smooth" });
   };

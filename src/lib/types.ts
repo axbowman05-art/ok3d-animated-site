@@ -19,7 +19,7 @@ export interface ProcessStep {
   number: string;
   title: string;
   description: string;
-  icon: "upload" | "review" | "print" | "deliver";
+  icon: "chat" | "review" | "print" | "deliver";
 }
 
 export interface GalleryItem {

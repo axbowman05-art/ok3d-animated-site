@@ -288,7 +288,6 @@ export default function Hero() {
               {heroContent.ctaSecondary}
             </Button>
           </div>
-          {/* TODO: replace with real Calendly link */}
           <a
             href="https://calendly.com/ok3dinc/3d-print-consultation"
             target="_blank"

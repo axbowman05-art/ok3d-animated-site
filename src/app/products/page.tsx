@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { products, type Product } from "@/lib/content";
+import { products } from "@/lib/content";
+import ProductCard from "@/components/ui/ProductCard";
 
 export const metadata: Metadata = {
   title: "Shop | OK3D Prints",
   description:
     "Every product starts as a custom project. Once it's built and ready for retail, it lands here.",
+  robots: { index: false, follow: false },
 };
 
 function EmptyState() {
@@ -48,12 +50,12 @@ function EmptyState() {
           </p>
 
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
-            Built to Order.{" "}
+            Built to Order{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(90deg, #0074FF, #FFDD00)" }}
             >
-              Listed Here.
+              Listed Here
             </span>
           </h1>
 
@@ -83,79 +85,6 @@ function EmptyState() {
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
-  return (
-    <div
-      className="rounded-xl overflow-hidden flex flex-col"
-      style={{
-        background: "rgba(0,116,255,0.04)",
-        border: "1px solid rgba(0,116,255,0.15)",
-        boxShadow: "0 0 24px rgba(0,116,255,0.06)",
-      }}
-    >
-      {/* Product image placeholder */}
-      <div
-        className="h-48 w-full flex items-center justify-center"
-        style={{ background: "rgba(0,42,94,0.4)" }}
-      >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover"
-          onError={(e) => {
-            (e.currentTarget as HTMLImageElement).style.display = "none";
-          }}
-        />
-        <span className="text-xs font-mono text-gray-600 uppercase tracking-widest">
-          {product.category}
-        </span>
-      </div>
-
-      <div className="p-6 flex flex-col flex-1">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-semibold text-white">{product.name}</h3>
-          <span
-            className="text-xs font-mono px-2 py-0.5 rounded-full shrink-0"
-            style={{
-              background: "rgba(0,116,255,0.12)",
-              color: "#0074FF",
-              border: "1px solid rgba(0,116,255,0.2)",
-            }}
-          >
-            {product.material}
-          </span>
-        </div>
-
-        <p className="text-sm text-gray-400 leading-relaxed mb-4 flex-1">
-          {product.description}
-        </p>
-
-        <div className="flex items-center justify-between mt-auto">
-          <span className="font-bold text-white">
-            {product.price === 0 ? "Quote required" : `$${product.price.toFixed(2)}`}
-          </span>
-          <Link
-            href={`/quote?part=${encodeURIComponent(product.name)}`}
-            className="text-sm font-semibold px-4 py-2 rounded-lg transition-all active:scale-[0.97]"
-            style={{
-              backgroundColor: "#FFDD00",
-              color: "#0A0A0A",
-            }}
-          >
-            Get This Part
-          </Link>
-        </div>
-
-        {!product.available && (
-          <p className="text-xs text-gray-600 mt-3 font-mono">
-            Currently unavailable — request a custom build
-          </p>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default function ProductsPage() {
   if (products.length === 0) {
@@ -180,12 +109,12 @@ export default function ProductsPage() {
             Shop
           </p>
           <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-4">
-            Built to Order.{" "}
+            Built to Order{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "linear-gradient(90deg, #0074FF, #FFDD00)" }}
             >
-              Listed Here.
+              Listed Here
             </span>
           </h1>
           <p className="text-gray-400 max-w-xl">

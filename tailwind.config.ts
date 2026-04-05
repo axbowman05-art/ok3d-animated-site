@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#0A0A0A",
+        background: "#0D0D0D",
         foreground: "#F8FAFC",
         accent: "#0074FF",
         "accent-dark": "#0058CC",
@@ -17,12 +17,12 @@ const config: Config = {
         cta: "#FFDD00",
         "cta-dark": "#E5C700",
         "cta-glow": "rgba(255, 221, 0, 0.4)",
-        card: "#111827",
-        "card-hover": "#1F2937",
-        border: "#1E3A5F",
-        "border-light": "#2A4A70",
-        muted: "#94A3B8",
-        navy: "#002A5E",
+        card: "#161F2E",
+        "card-hover": "#1F2F42",
+        border: "#243F65",
+        "border-light": "#2E5080",
+        muted: "#A0B4CC",
+        navy: "#003270",
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],

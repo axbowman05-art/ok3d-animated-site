@@ -110,7 +110,6 @@ export default function CTA() {
           >
             {ctaContent.ctaText}
           </Button>
-          {/* TODO: replace with real Calendly link */}
           <a
             href="https://calendly.com/ok3dinc/3d-print-consultation"
             target="_blank"
@@ -120,10 +119,6 @@ export default function CTA() {
             Schedule a Consultation
           </a>
         </div>
-
-        <p className="text-sm text-gray-500 italic mt-4">
-          {ctaContent.ctaSecondaryText}
-        </p>
 
         <p
           className="cta-fallback text-sm text-gray-500 mt-8"

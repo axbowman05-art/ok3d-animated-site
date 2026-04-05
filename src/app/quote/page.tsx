@@ -7,10 +7,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeftIcon, CheckIcon } from "@heroicons/react/24/outline";
 import Button from "@/components/ui/Button";
-import { materialOptions, quantityOptions, deadlineOptions, quoteFormContent } from "@/lib/content";
+import { materialOptions, deadlineOptions, quoteFormContent } from "@/lib/content";
 import { quoteSchema, type QuoteFormValues } from "@/lib/quote-schema";
 
-const steps = ["Contact", "Project", "Details", "Confirm"];
+const steps = ["Contact", "Project", "Details", "Review"];
 
 export default function QuotePage() {
   const [step, setStep] = useState(0);
@@ -101,18 +101,22 @@ export default function QuotePage() {
               <p className="text-xs text-gray-500 mb-1 uppercase tracking-widest">
                 Tracking Code
               </p>
-              <p className="font-mono text-accent text-base break-all">
+              <p className="font-mono text-accent text-base break-all mb-2">
                 {trackingCode}
               </p>
-              <p className="text-xs text-gray-500 mt-2">
-                Save this code to check the status of your order.
-              </p>
+              <a
+                href={`https://api.ok3dprints.com/orders/track/${trackingCode}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-accent hover:text-accent/80 underline transition-colors"
+              >
+                Check order status &rarr;
+              </a>
             </div>
           )}
           <Button href="/" variant="secondary">
             Back to Home
           </Button>
-          {/* TODO: replace with real Calendly link */}
           <a
             href="https://calendly.com/ok3dinc/3d-print-consultation"
             target="_blank"
@@ -180,7 +184,7 @@ export default function QuotePage() {
           ))}
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={(e) => e.preventDefault()} onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}>
           <AnimatePresence mode="wait">
             {step === 0 && (
               <motion.div
@@ -239,11 +243,14 @@ export default function QuotePage() {
                   error={errors.material?.message}
                   {...register("material")}
                 />
-                <SelectField
-                  label="Quantity"
-                  options={quantityOptions}
+                <InputField
+                  label="Number of Parts"
+                  type="number"
+                  min="1"
+                  max="10000"
+                  placeholder=" "
                   error={errors.quantity?.message}
-                  {...register("quantity")}
+                  {...register("quantity", { valueAsNumber: true })}
                 />
                 <TextareaField
                   label={quoteFormContent.step2DescriptionLabel}
@@ -331,7 +338,7 @@ export default function QuotePage() {
                 Continue
               </Button>
             ) : (
-              <Button type="submit" disabled={submitting} magnetic>
+              <Button type="button" onClick={handleSubmit(onSubmit)} disabled={submitting} magnetic>
                 {submitting ? "Sending..." : "Submit Quote Request"}
               </Button>
             )}
@@ -434,7 +441,7 @@ function SummaryBlock({ data }: { data: QuoteFormValues }) {
     { label: "Email", value: data.email },
     { label: "Company", value: data.company || "—" },
     { label: "Material", value: data.material },
-    { label: "Quantity", value: data.quantity },
+    { label: "Number of Parts", value: `${data.quantity} part${data.quantity === 1 ? "" : "s"}` },
     { label: "Deadline", value: data.deadline },
     { label: "Description", value: data.description },
     { label: "Notes", value: data.notes || "—" },

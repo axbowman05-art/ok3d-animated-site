@@ -1,6 +1,10 @@
 import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero";
 
+const AssemblyReel = dynamic(
+  () => import("@/components/sections/AssemblyReel"),
+  { ssr: false }
+);
 const WhatWeDo = dynamic(() => import("@/components/sections/WhatWeDo"), {
   ssr: false,
 });
@@ -25,6 +29,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <AssemblyReel />
       <WhatWeDo />
       <Materials />
       <Process />

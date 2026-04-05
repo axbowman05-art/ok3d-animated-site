@@ -19,7 +19,7 @@ export default function Testimonials() {
 
   // Mobile auto-rotate
   useEffect(() => {
-    if (!isMobile) return;
+    if (!isMobile || testimonials.length === 0) return;
     const interval = setInterval(() => {
       setCurrent((c) => (c + 1) % testimonials.length);
     }, 5000);
@@ -114,68 +114,74 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        {/* Desktop: 3 cards with depth stagger */}
-        <div className="test-cards hidden md:grid md:grid-cols-3 gap-6 items-start">
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={i} t={t} isCenter={i === 1} />
-          ))}
-        </div>
-
-        {/* Mobile: carousel */}
-        <div className="md:hidden relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -50 }}
-              transition={{ duration: 0.3 }}
-            >
-              <TestimonialCard
-                t={testimonials[current]}
-
-                isCenter
-              />
-            </motion.div>
-          </AnimatePresence>
-
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <button
-              onClick={() =>
-                setCurrent(
-                  (c) => (c - 1 + testimonials.length) % testimonials.length
-                )
-              }
-              className="p-2 text-gray-500 hover:text-white transition-colors"
-              aria-label="Previous testimonial"
-            >
-              <ChevronLeftIcon className="w-5 h-5" />
-            </button>
-
-            <div className="flex gap-2">
-              {testimonials.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrent(i)}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    i === current ? "bg-accent w-6" : "bg-gray-600"
-                  }`}
-                  aria-label={`Go to testimonial ${i + 1}`}
-                />
+        {testimonials.length === 0 ? (
+          <div className="test-card text-center py-16 border border-dashed border-border rounded-xl" style={reducedMotion ? undefined : { opacity: 0 }}>
+            <p className="text-gray-500 font-mono text-sm tracking-wider uppercase">
+              Testimonials coming soon
+            </p>
+          </div>
+        ) : (
+          <>
+            {/* Desktop: 3 cards with depth stagger */}
+            <div className="test-cards hidden md:grid md:grid-cols-3 gap-6 items-start">
+              {testimonials.map((t, i) => (
+                <TestimonialCard key={i} t={t} isCenter={i === 1} />
               ))}
             </div>
 
-            <button
-              onClick={() =>
-                setCurrent((c) => (c + 1) % testimonials.length)
-              }
-              className="p-2 text-gray-500 hover:text-white transition-colors"
-              aria-label="Next testimonial"
-            >
-              <ChevronRightIcon className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
+            {/* Mobile: carousel */}
+            <div className="md:hidden relative">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -50 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <TestimonialCard t={testimonials[current]} isCenter />
+                </motion.div>
+              </AnimatePresence>
+
+              <div className="flex items-center justify-center gap-4 mt-6">
+                <button
+                  onClick={() =>
+                    setCurrent(
+                      (c) => (c - 1 + testimonials.length) % testimonials.length
+                    )
+                  }
+                  className="p-2 text-gray-500 hover:text-white transition-colors"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeftIcon className="w-5 h-5" />
+                </button>
+
+                <div className="flex gap-2">
+                  {testimonials.map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => setCurrent(i)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        i === current ? "bg-accent w-6" : "bg-gray-600"
+                      }`}
+                      aria-label={`Go to testimonial ${i + 1}`}
+                    />
+                  ))}
+                </div>
+
+                <button
+                  onClick={() =>
+                    setCurrent((c) => (c + 1) % testimonials.length)
+                  }
+                  className="p-2 text-gray-500 hover:text-white transition-colors"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRightIcon className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

@@ -69,7 +69,7 @@ export async function findOrCreateCustomer(
 ): Promise<HubCustomer> {
   // If we have an email, search for existing customer first
   if (data.email) {
-    const listRes = await fetch(`${HUB_API_URL}/api/customers/`, {
+    const listRes = await fetch(`${HUB_API_URL}/api/customers`, {
       method: "GET",
       headers: hubHeaders(),
     });
@@ -84,7 +84,7 @@ export async function findOrCreateCustomer(
   }
 
   // Create new customer
-  const createRes = await fetch(`${HUB_API_URL}/api/customers/`, {
+  const createRes = await fetch(`${HUB_API_URL}/api/customers`, {
     method: "POST",
     headers: hubHeaders(),
     body: JSON.stringify(data),
@@ -108,7 +108,7 @@ export async function createQuoteOrder(
   customerId: number,
   formData: {
     material: string;
-    quantity: string;
+    quantity: number;
     description: string;
     deadline: string;
     notes?: string;
@@ -140,7 +140,7 @@ export async function createQuoteOrder(
     notes: noteLines,
   };
 
-  const res = await fetch(`${HUB_API_URL}/api/orders/`, {
+  const res = await fetch(`${HUB_API_URL}/api/orders`, {
     method: "POST",
     headers: hubHeaders(),
     body: JSON.stringify(payload),

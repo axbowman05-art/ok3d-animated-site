@@ -86,7 +86,7 @@ export default function Materials() {
         </div>
 
         {/* Desktop grid */}
-        <div className="mat-grid hidden md:grid md:grid-cols-5 gap-4">
+        <div className="mat-grid hidden md:grid md:grid-cols-3 lg:grid-cols-6 gap-4">
           {materials.map((mat) => (
             <div
               key={mat.name}
@@ -107,7 +107,7 @@ export default function Materials() {
                 className={`absolute inset-0 bg-gradient-to-br ${mat.colorClass} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
 
-              <div className="relative">
+              <div className="relative flex flex-col h-full">
                 {/* Color swatch dot */}
                 <div className="flex items-center gap-2 mb-4">
                   <div
@@ -117,7 +117,7 @@ export default function Materials() {
                   <h3 className="text-lg font-bold">{mat.name}</h3>
                 </div>
 
-                <ul className="space-y-1.5 mb-4">
+                <ul className="space-y-1.5 mb-4 flex-1">
                   {mat.properties.map((prop) => (
                     <li
                       key={prop}
