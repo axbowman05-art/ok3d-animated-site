@@ -130,9 +130,9 @@ Top targets to prioritize:
 4. Start Hub + cloudflared as systemd services on VM
 5. Deploy Prints to Vercel → connect `axbowman05-art/ok3d-animated-site` → add env vars:
    - `HUB_API_URL` = `https://api.ok3dprints.com`
-   - `RESEND_API_KEY` = `re_jNCjo1qB_9WP1fo3m8ZP77EBsBscjQX44`
+   - `RESEND_API_KEY` = `[see your Resend dashboard]`
    - `NOTIFY_EMAIL` = `ok3dinc@gmail.com`
-   - `HUB_API_SECRET` = `a2d419705f6fa051f4bfd93a55d12e85964aa73f8faf7c2d076351f385a5630d`
+   - `HUB_API_SECRET` = `[see .env.local on VM]`
    - `NEXT_PUBLIC_SITE_URL` = `https://ok3dprints.com`
 6. Connect domain in Vercel dashboard
 7. Add Resend DNS records for sender domain verification
